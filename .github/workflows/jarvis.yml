@@ -1,0 +1,21 @@
+name: Jarvis
+
+on:
+  schedule:
+    - cron: "2,17,32,47 * * * *"   # alle 15 Minuten, kurz nach jeder fertigen Kerze
+  workflow_dispatch:                 # Knopf "Run workflow" zum Testen
+
+jobs:
+  pruefen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Jarvis prueft Bitcoin
+        run: python jarvis_cloud.py
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
