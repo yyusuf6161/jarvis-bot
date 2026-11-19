@@ -1,0 +1,9 @@
+{
+ "name": "TJR 1h Ziel 2R + Trendfilter",
+ "aktiv": true,
+ "intervall": "1h",
+ "ziel_r": 2.0,
+ "trendfilter": true,
+ "trend_ema": 200,
+ "getestet": "2026-11-19"
+}

@@ -1,0 +1,162 @@
+[
+ {
+  "name": "TJR 1h Ziel 3R + Trendfilter",
+  "intervall": "1h",
+  "ziel_r": 3.0,
+  "trendfilter": true,
+  "trend_ema": 200,
+  "train": {
+   "n": 221,
+   "quote": 27.601809954751133,
+   "summe": -0.07479128699985882,
+   "pro_trade": -0.00033842211312153314
+  },
+  "pruef": {
+   "n": 107,
+   "quote": 31.77570093457944,
+   "summe": 12.621608610966154,
+   "pro_trade": 0.1179589589809921
+  },
+  "bestanden": false
+ },
+ {
+  "name": "TJR 4h Ziel 3R + Trendfilter",
+  "intervall": "4h",
+  "ziel_r": 3.0,
+  "trendfilter": true,
+  "trend_ema": 50,
+  "train": {
+   "n": 117,
+   "quote": 34.18803418803419,
+   "summe": 37.18017555273504,
+   "pro_trade": 0.3177792782285046
+  },
+  "pruef": {
+   "n": 46,
+   "quote": 28.26086956521739,
+   "summe": 3.365372290143272,
+   "pro_trade": 0.07316026717702764
+  },
+  "bestanden": true
+ },
+ {
+  "name": "TJR 1h Ziel 2R + Trendfilter",
+  "intervall": "1h",
+  "ziel_r": 2.0,
+  "trendfilter": true,
+  "trend_ema": 200,
+  "train": {
+   "n": 237,
+   "quote": 40.50632911392405,
+   "summe": 26.01736921521425,
+   "pro_trade": 0.1097779291781192
+  },
+  "pruef": {
+   "n": 109,
+   "quote": 40.36697247706422,
+   "summe": 6.405739955928642,
+   "pro_trade": 0.058768256476409556
+  },
+  "bestanden": true
+ },
+ {
+  "name": "TJR 1h Ziel 2R",
+  "intervall": "1h",
+  "ziel_r": 2.0,
+  "trendfilter": false,
+  "trend_ema": 200,
+  "train": {
+   "n": 389,
+   "quote": 41.131105398457585,
+   "summe": 48.70415251198364,
+   "pro_trade": 0.1252034768945595
+  },
+  "pruef": {
+   "n": 196,
+   "quote": 38.775510204081634,
+   "summe": 2.0601139631642864,
+   "pro_trade": 0.0105107855263484
+  },
+  "bestanden": true
+ },
+ {
+  "name": "TJR 1h Ziel 3R",
+  "intervall": "1h",
+  "ziel_r": 3.0,
+  "trendfilter": false,
+  "trend_ema": 200,
+  "train": {
+   "n": 356,
+   "quote": 30.0561797752809,
+   "summe": 33.41772750738792,
+   "pro_trade": 0.09387002108816832
+  },
+  "pruef": {
+   "n": 179,
+   "quote": 27.932960893854748,
+   "summe": -6.226981279718299,
+   "pro_trade": -0.03478760491462737
+  },
+  "bestanden": false
+ },
+ {
+  "name": "TJR 4h Ziel 2R + Trendfilter",
+  "intervall": "4h",
+  "ziel_r": 2.0,
+  "trendfilter": true,
+  "trend_ema": 50,
+  "train": {
+   "n": 121,
+   "quote": 39.66942148760331,
+   "summe": 16.98139146807013,
+   "pro_trade": 0.14034207824851347
+  },
+  "pruef": {
+   "n": 47,
+   "quote": 34.04255319148936,
+   "summe": -1.6936865333861393,
+   "pro_trade": -0.036035883689066794
+  },
+  "bestanden": false
+ },
+ {
+  "name": "TJR 4h Ziel 2R",
+  "intervall": "4h",
+  "ziel_r": 2.0,
+  "trendfilter": false,
+  "trend_ema": 50,
+  "train": {
+   "n": 217,
+   "quote": 36.40552995391705,
+   "summe": 8.35996512544521,
+   "pro_trade": 0.03852518490988576
+  },
+  "pruef": {
+   "n": 80,
+   "quote": 33.75,
+   "summe": -3.295155101624167,
+   "pro_trade": -0.04118943877030209
+  },
+  "bestanden": false
+ },
+ {
+  "name": "TJR 4h Ziel 3R",
+  "intervall": "4h",
+  "ziel_r": 3.0,
+  "trendfilter": false,
+  "trend_ema": 50,
+  "train": {
+   "n": 204,
+   "quote": 28.92156862745098,
+   "summe": 21.298482886692305,
+   "pro_trade": 0.10440432787594267
+  },
+  "pruef": {
+   "n": 76,
+   "quote": 25.0,
+   "summe": -3.999282158011942,
+   "pro_trade": -0.05262213365805187
+  },
+  "bestanden": false
+ }
+]
