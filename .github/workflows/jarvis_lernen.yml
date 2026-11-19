@@ -1,0 +1,34 @@
+name: Jarvis lernt
+
+on:
+  schedule:
+    - cron: "20 2 * * *"     # jede Nacht um ca. 3:20 Uhr deutscher Zeit
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: jarvis-daten
+  cancel-in-progress: false
+
+jobs:
+  lernen:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Jarvis testet alle Varianten neu
+        run: python jarvis_lernen.py
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      - name: Ergebnis speichern
+        run: |
+          git config user.name "jarvis-bot"
+          git config user.email "jarvis-bot@users.noreply.github.com"
+          git add strategie.json lernen
+          git diff --cached --quiet || (git commit -m "Jarvis hat gelernt" && git pull --rebase && git push)
