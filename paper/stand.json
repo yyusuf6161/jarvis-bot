@@ -1,7 +1,22 @@
 {
  "start": 1795123533945,
- "konto": 1000.0,
+ "konto": 1038.69,
  "offen": [
+  {
+   "coin": "LINKUSDT",
+   "intervall": "1h",
+   "strategie": "TJR 1h Ziel 2R + Trendfilter",
+   "richtung": "VERKAUF",
+   "einstieg": 8.977,
+   "stop": 9.41,
+   "ziel": 8.111,
+   "risiko_usd": 10.0,
+   "eroeffnet": 1795125600000,
+   "geprueft_bis": 1795186800000,
+   "kerzen": 18
+  }
+ ],
+ "geschlossen": [
   {
    "coin": "SOLUSDT",
    "intervall": "1h",
@@ -12,8 +27,13 @@
    "ziel": 68.02999999999999,
    "risiko_usd": 10.0,
    "eroeffnet": 1795125600000,
-   "geprueft_bis": 1795183200000,
-   "kerzen": 17
+   "geprueft_bis": 1795186800000,
+   "kerzen": 18,
+   "ergebnis": "ZIEL",
+   "ausstieg": 68.02999999999999,
+   "r": 1.942,
+   "gewinn_usd": 19.42,
+   "geschlossen": 1795186800000
   },
   {
    "coin": "DOGEUSDT",
@@ -25,24 +45,15 @@
    "ziel": 0.05507000000000001,
    "risiko_usd": 10.0,
    "eroeffnet": 1795125600000,
-   "geprueft_bis": 1795183200000,
-   "kerzen": 17
-  },
-  {
-   "coin": "LINKUSDT",
-   "intervall": "1h",
-   "strategie": "TJR 1h Ziel 2R + Trendfilter",
-   "richtung": "VERKAUF",
-   "einstieg": 8.977,
-   "stop": 9.41,
-   "ziel": 8.111,
-   "risiko_usd": 10.0,
-   "eroeffnet": 1795125600000,
-   "geprueft_bis": 1795183200000,
-   "kerzen": 17
+   "geprueft_bis": 1795186800000,
+   "kerzen": 18,
+   "ergebnis": "ZIEL",
+   "ausstieg": 0.05507000000000001,
+   "r": 1.927,
+   "gewinn_usd": 19.27,
+   "geschlossen": 1795186800000
   }
  ],
- "geschlossen": [],
  "gemeldet": [
   "SOLUSDT-1h-verkauf-1795096800000",
   "DOGEUSDT-1h-verkauf-1795086000000",
