@@ -12,8 +12,8 @@
    "ziel": 68.02999999999999,
    "risiko_usd": 10.0,
    "eroeffnet": 1795125600000,
-   "geprueft_bis": 1795179600000,
-   "kerzen": 16
+   "geprueft_bis": 1795183200000,
+   "kerzen": 17
   },
   {
    "coin": "DOGEUSDT",
@@ -25,8 +25,8 @@
    "ziel": 0.05507000000000001,
    "risiko_usd": 10.0,
    "eroeffnet": 1795125600000,
-   "geprueft_bis": 1795179600000,
-   "kerzen": 16
+   "geprueft_bis": 1795183200000,
+   "kerzen": 17
   },
   {
    "coin": "LINKUSDT",
@@ -38,8 +38,8 @@
    "ziel": 8.111,
    "risiko_usd": 10.0,
    "eroeffnet": 1795125600000,
-   "geprueft_bis": 1795179600000,
-   "kerzen": 16
+   "geprueft_bis": 1795183200000,
+   "kerzen": 17
   }
  ],
  "geschlossen": [],
