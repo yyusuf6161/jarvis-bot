@@ -1,21 +1,7 @@
 {
  "start": 1795123533945,
- "konto": 1038.69,
- "offen": [
-  {
-   "coin": "LINKUSDT",
-   "intervall": "1h",
-   "strategie": "TJR 1h Ziel 2R + Trendfilter",
-   "richtung": "VERKAUF",
-   "einstieg": 8.977,
-   "stop": 9.41,
-   "ziel": 8.111,
-   "risiko_usd": 10.0,
-   "eroeffnet": 1795125600000,
-   "geprueft_bis": 1795230000000,
-   "kerzen": 30
-  }
- ],
+ "konto": 1058.28,
+ "offen": [],
  "geschlossen": [
   {
    "coin": "SOLUSDT",
@@ -52,6 +38,24 @@
    "r": 1.927,
    "gewinn_usd": 19.27,
    "geschlossen": 1795186800000
+  },
+  {
+   "coin": "LINKUSDT",
+   "intervall": "1h",
+   "strategie": "TJR 1h Ziel 2R + Trendfilter",
+   "richtung": "VERKAUF",
+   "einstieg": 8.977,
+   "stop": 9.41,
+   "ziel": 8.111,
+   "risiko_usd": 10.0,
+   "eroeffnet": 1795125600000,
+   "geprueft_bis": 1795233600000,
+   "kerzen": 31,
+   "ergebnis": "ZIEL",
+   "ausstieg": 8.111,
+   "r": 1.959,
+   "gewinn_usd": 19.59,
+   "geschlossen": 1795233600000
   }
  ],
  "gemeldet": [
