@@ -17,7 +17,7 @@ import time
 
 import jarvis_stufe1 as jarvis
 from jarvis_daten import COINS, ema, kerzen_laden
-from jarvis_paper import STAND, STRATEGIE, STANDARD_STRATEGIE, lesen, schreiben, senden
+from jarvis_paper import STAND, STAND_KAUF, STRATEGIE, STANDARD_STRATEGIE, lesen, schreiben, senden
 
 TRAINING_ANTEIL = 0.7
 GEBUEHR = 0.001
@@ -111,10 +111,10 @@ def labor():
     return sorted(ergebnisse, key=lambda e: e["pruef"]["pro_trade"], reverse=True)
 
 
-def paper_zusammenfassung(seit_ms=None):
-    stand = lesen(STAND, None)
+def paper_zusammenfassung(seit_ms=None, pfad=STAND, titel="Paper Trading"):
+    stand = lesen(pfad, None)
     if not stand:
-        return "Paper Trading: noch keine Daten."
+        return f"{titel}: noch keine Daten."
     zu = [t for t in stand["geschlossen"] if seit_ms is None or t["geschlossen"] >= seit_ms]
     alle = stand["geschlossen"]
     def zeile(ts):
@@ -122,7 +122,7 @@ def paper_zusammenfassung(seit_ms=None):
             return "0 Trades"
         gew = sum(1 for t in ts if t["r"] > 0)
         return f"{len(ts)} Trades, {100 * gew / len(ts):.0f} % Treffer, {sum(t['r'] for t in ts):+.1f} R"
-    return (f"Paper Trading\n  Diese Woche: {zeile(zu)}\n  Seit Start:  {zeile(alle)}\n"
+    return (f"{titel}\n  Diese Woche: {zeile(zu)}\n  Seit Start:  {zeile(alle)}\n"
             f"  Offen: {len(stand['offen'])}\n  Spielgeld-Konto: {stand['konto']:,.2f} $ (Start 1.000 $)")
 
 
@@ -176,7 +176,8 @@ def main():
         status = f"Aktive Strategie: {strat['name']}" if strat.get("aktiv") else "Status: Pause"
         bester = bestanden[0]["name"] if bestanden else "keine"
         senden(f"📊 Jarvis Wochenbericht\n\n{status}\nHeute bestanden: {len(bestanden)} von {len(ergebnisse)} "
-               f"Varianten (beste: {bester})\n\n{paper_zusammenfassung(woche)}\n\nKein echtes Geld im Spiel.")
+               f"Varianten (beste: {bester})\n\n{paper_zusammenfassung(woche)}\n\n"
+               f"{paper_zusammenfassung(woche, STAND_KAUF, '🛒 Kauf-Spur (nur Kaeufe, 4h)')}\n\nKein echtes Geld im Spiel.")
 
 
 if __name__ == "__main__":

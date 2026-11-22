@@ -77,6 +77,8 @@ def neue_signale(stand, strat, coin, kerzen):
     if any(t["coin"] == coin for t in stand["offen"]):
         return  # pro Coin nur ein Trade gleichzeitig (wie im Labor)
     kauf = sig["richtung"] == "KAUF"
+    if strat.get("nur_kauf") and not kauf:
+        return
     if strat.get("trendfilter"):
         trend = ema([k["close"] for k in kerzen], strat["trend_ema"])[-1]
         if kauf != (kerzen[-1]["close"] > trend):
@@ -91,12 +93,12 @@ def neue_signale(stand, strat, coin, kerzen):
              "eroeffnet": kerzen[-1]["zeit"], "geprueft_bis": kerzen[-1]["zeit"] - 1, "kerzen": 0}
     stand["offen"].append(trade)
     pfeil = "🟢" if kauf else "🔴"
-    senden(f"📝 {pfeil} Paper-Trade: {sig['richtung']} {kurz(coin)} ({strat['intervall']})\n"
+    senden(f"{strat.get('label', '')}📝 {pfeil} Paper-Trade: {sig['richtung']} {kurz(coin)} ({strat['intervall']})\n"
            f"Einstieg {preis(sig['einstieg'])} $ · Stop {preis(sig['stop'])} $ · Ziel {preis(ziel)} $\n"
            f"Spielgeld-Risiko: {trade['risiko_usd']:.0f} $")
 
 
-def offene_pruefen(stand, coin, kerzen):
+def offene_pruefen(stand, coin, kerzen, label=""):
     for t in [t for t in stand["offen"] if t["coin"] == coin]:
         kauf = t["richtung"] == "KAUF"
         ergebnis = None
@@ -125,45 +127,60 @@ def offene_pruefen(stand, coin, kerzen):
         stand["offen"].remove(t)
         stand["geschlossen"].append(t)
         zeichen = {"ZIEL": "✅ Ziel erreicht", "STOP": "❌ Stop-Loss", "ZEIT": "⏱️ Zeit abgelaufen"}[ergebnis]
-        senden(f"{zeichen}: {kurz(coin)} {t['richtung']} {r:+.2f} R ({gewinn:+.2f} $)\n"
+        senden(f"{label}{zeichen}: {kurz(coin)} {t['richtung']} {r:+.2f} R ({gewinn:+.2f} $)\n"
                f"Spielgeld-Konto: {stand['konto']:,.2f} $")
 
 
-def main():
-    stand = lesen(STAND, {"start": int(time.time() * 1000), "konto": STARTKONTO,
-                          "offen": [], "geschlossen": [], "gemeldet": []})
-    strat = lesen(STRATEGIE, STANDARD_STRATEGIE)
-    erster_lauf = not os.path.exists(STAND)
+# Zweite Spur: nur Kaeufe, wie sie auf einem normalen Krypto-Konto moeglich sind.
+KAUF_SPUR = {"name": "NUR KAUF 4h Ziel 2R + Trendfilter", "aktiv": True, "intervall": "4h",
+             "ziel_r": 2.0, "trendfilter": True, "trend_ema": 50, "nur_kauf": True,
+             "label": "🛒 Kauf-Spur\n"}
+STAND_KAUF = os.path.join(ORDNER, "paper", "stand_kauf.json")
 
+
+def spur(strat, stand_pfad, cache):
+    neu = not os.path.exists(stand_pfad)
+    stand = lesen(stand_pfad, {"start": int(time.time() * 1000), "konto": STARTKONTO,
+                               "offen": [], "geschlossen": [], "gemeldet": []})
+    label = strat.get("label", "")
     for coin in COINS:
         intervalle = {strat["intervall"]} | {t["intervall"] for t in stand["offen"] if t["coin"] == coin}
         for intervall in intervalle:
-            try:
-                tage = 520 * DAUER_MS[intervall] / 86400000
-                kerzen, quelle = kerzen_laden(coin, intervall, tage)
-            except Exception as fehler:
-                print(f"{coin} {intervall}: keine Daten ({fehler})")
-                continue
+            schluessel = (coin, intervall)
+            if schluessel not in cache:
+                try:
+                    tage = 520 * DAUER_MS[intervall] / 86400000
+                    cache[schluessel] = kerzen_laden(coin, intervall, tage)
+                except Exception as fehler:
+                    print(f"{coin} {intervall}: keine Daten ({fehler})")
+                    cache[schluessel] = ([], "-")
+            kerzen, quelle = cache[schluessel]
             if not kerzen:
                 continue
-            if intervall == strat["intervall"] and not erster_lauf:
-                neue_signale(stand, strat, coin, kerzen)
-            elif intervall == strat["intervall"] and erster_lauf:
-                # Beim ersten Start alte Muster nur merken, nicht nachtraeglich handeln
-                sig = jarvis.suche_signal(kerzen[-199:])
-                if sig:
-                    stand["gemeldet"].append(f"{coin}-{intervall}-{sig['id']}")
-            offene_pruefen(stand, coin, kerzen)
-            print(f"{kurz(coin)} {intervall}: {preis(kerzen[-1]['close'])} $ ({quelle})")
-
-    if erster_lauf:
-        senden(f"🚀 Jarvis Paper Trading gestartet\nStrategie: {strat['name']}\n"
+            if intervall == strat["intervall"]:
+                if neu:
+                    # Beim ersten Start alte Muster nur merken, nicht nachtraeglich handeln
+                    sig = jarvis.suche_signal(kerzen[-199:])
+                    if sig:
+                        stand["gemeldet"].append(f"{coin}-{intervall}-{sig['id']}")
+                else:
+                    neue_signale(stand, strat, coin, kerzen)
+            offene_pruefen(stand, coin, kerzen, label)
+            print(f"{label.strip()} {kurz(coin)} {intervall}: {preis(kerzen[-1]['close'])} $ ({quelle})")
+    if neu:
+        senden(f"{label}🚀 Paper Trading gestartet\nStrategie: {strat['name']}\n"
                f"Coins: {', '.join(kurz(c) for c in COINS)}\nSpielgeld: {STARTKONTO:,.0f} $")
     elif os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch":
-        senden(f"☁️ Jarvis laeuft. Strategie: {strat['name']}\n"
+        senden(f"{label}☁️ Jarvis laeuft. Strategie: {strat['name']}\n"
                f"Offene Trades: {len(stand['offen'])} · Abgeschlossen: {len(stand['geschlossen'])}\n"
                f"Spielgeld-Konto: {stand['konto']:,.2f} $")
-    schreiben(STAND, stand)
+    schreiben(stand_pfad, stand)
+
+
+def main():
+    cache = {}
+    spur(lesen(STRATEGIE, STANDARD_STRATEGIE), STAND, cache)
+    spur(KAUF_SPUR, STAND_KAUF, cache)
 
 
 if __name__ == "__main__":
