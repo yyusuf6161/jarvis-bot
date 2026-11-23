@@ -3,5 +3,7 @@
  "konto": 1000.0,
  "offen": [],
  "geschlossen": [],
- "gemeldet": []
+ "gemeldet": [
+  "ETHUSDT-4h-verkauf-1794830400000"
+ ]
 }
