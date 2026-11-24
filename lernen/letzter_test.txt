@@ -1,10 +1,10 @@
-Jarvis-Test vom 2026-11-23 (10 Coins, inkl. Gebuehren)
+Jarvis-Test vom 2026-11-24 (10 Coins, inkl. Gebuehren)
 Variante                                  Training            Pruefung
-TJR 1h Ziel 3R + Trendfilter    223  28%   +5.6R   109  34%  +22.5R  OK
-TJR 1h Ziel 2R + Trendfilter    239  41%  +29.7R   112  43%  +15.4R  OK
+TJR 1h Ziel 3R + Trendfilter    222  28%   +6.8R   109  33%  +18.5R  OK
+TJR 1h Ziel 2R + Trendfilter    238  41%  +27.8R   111  42%  +13.4R  OK
 TJR 4h Ziel 3R + Trendfilter    117  34%  +37.2R    46  28%   +3.4R  OK
-TJR 1h Ziel 2R                  389  41%  +51.5R   199  40%  +11.0R  OK
-TJR 1h Ziel 3R                  356  30%  +37.2R   181  29%   +3.7R  OK
+TJR 1h Ziel 2R                  388  41%  +49.7R   199  40%   +7.9R  OK
+TJR 1h Ziel 3R                  355  30%  +38.4R   182  29%   -1.5R  --
 TJR 4h Ziel 2R + Trendfilter    121  40%  +17.0R    47  34%   -1.7R  --
-TJR 4h Ziel 2R                  217  36%   +8.4R    80  34%   -3.3R  --
-TJR 4h Ziel 3R                  204  29%  +21.3R    76  25%   -4.0R  --
+TJR 4h Ziel 2R                  216  37%   +9.4R    80  34%   -3.3R  --
+TJR 4h Ziel 3R                  203  29%  +22.3R    76  25%   -4.0R  --
